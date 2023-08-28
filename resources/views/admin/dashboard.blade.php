@@ -15,7 +15,7 @@
                         Projects
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -26,7 +26,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($projectList as $project)
-                                    <tr>
+                                    <tr class="table-{{$project->type->color}}">
                                         <th scope="row">{{$project->id}}</th>
                                         <td>{{$project->title}}</td>
                                         <td>{{$project->repo}}</td>
@@ -55,10 +55,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($typeList as $type)
-                                    <tr>
+                                    <tr class="table-{{$type->color}}"">
                                         <th scope="row">{{$type->id}}</th>
                                         <td>{{$type->name}}</td>
-                                        <td class="text-center"><span class="badge" style="background-color:{{$type->color}}">{{$type->name}}</span></td>
+                                        <td class="text-center"><span class="badge bg-dark">{{$type->name}}</span></td>
                                     </tr>
                                 @endforeach
                             </tbody>
