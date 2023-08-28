@@ -18,10 +18,13 @@
                     <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <div class="mb-3 col-1">
-                    <label for="color" class="form-label">
-                        Color
-                    </label>
-                    <input type="color" class="form-control" id="color" name="color">
+                    <select class="form-select" id="color" name="color">
+                        <option selected>Open this select menu</option>
+                        <option value="primary" class="text-primary">Blue</option>
+                        <option value="success" class="text-success">Green</option>
+                        <option value="danger" class="text-danger">Red</option>
+                        <option value="warning" class="text-warning">Yellow</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-success">
                     <i class="fa-solid fa-check"></i>

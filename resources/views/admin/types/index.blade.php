@@ -62,7 +62,7 @@
                                     {{ $type->name  }}
                                 </td>
                                 <td>
-                                    <span class="badge" style="background-color:{{$type->color}}">{{ $type->name }}</div>
+                                    <span class="badge bg-dark">{{ $type->name }}</div>
                                     
                                 </td>
                                 <td class="text-center">
