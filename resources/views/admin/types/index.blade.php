@@ -11,31 +11,31 @@
         <div class="row">
             @if (session('deleted'))
                 <div class="col-12">
-                    <div class="alert alert-danger">
+                    <div class="alert alert-info">
                         <i class="fa-solid fa-circle-xmark"></i> <strong>{{ session('deleted') }}</strong> has been succesfully deleted.
                     </div>
                 </div>
             @elseif ( session('created'))
                 <div class="col-12">
-                    <div class="alert alert-success">
+                    <div class="alert alert-info">
                         <i class="fa-solid fa-circle-exclamation"></i> <strong>{{ session('created') }}</strong> has been succesfully created.
                     </div>
                 </div>
             @elseif ( session('updated'))
                 <div class="col-12">
-                    <div class="alert alert-warning">
+                    <div class="alert alert-info">
                         <i class="fa-solid fa-circle-exclamation"></i> <strong>{{ session('updated') }}</strong> has been succesfully updated.
                     </div>
                 </div>
             @elseif ( session('restored'))
                 <div class="col-12">
-                    <div class="alert alert-warning">
+                    <div class="alert alert-info">
                         <i class="fa-solid fa-circle-exclamation"></i> <strong>{{ session('restored') }}</strong> has been succesfully restored.
                     </div>
                 </div>
             @elseif ( session('hardDeleted'))
                 <div class="col-12">
-                    <div class="alert alert-success">
+                    <div class="alert alert-info">
                         <i class="fa-solid fa-circle-exclamation"></i> <strong>{{ session('destroyed') }}</strong> has been permanently deleted.
                     </div>
                 </div>
@@ -46,26 +46,26 @@
                 <table class="table table-striped table-hover table-bordered table-sm">
                     <thead>
                         <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Badge</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center bg-dark text-light">Id</th>
+                            <th class="bg-dark text-light">Name</th>
+                            <th class="text-center bg-dark text-light">Badge</th>
+                            <th class="text-center bg-dark text-light">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($typeList as $type)
                             <tr>
-                                <th scope="row">
+                                <th scope="row" class="col-1 text-center">
                                     {{ $type->id }}
                                 </th>
                                 <td>
                                     {{ $type->name  }}
                                 </td>
-                                <td>
-                                    <span class="badge bg-dark">{{ $type->name }}</div>
+                                <td class=" col-1 text-center">
+                                    <span class="badge bg-{{$type->color}}">{{ $type->name }}</div>
                                     
                                 </td>
-                                <td class="text-center">
+                                <td class="col-1 text-center">
                                     <a class="btn btn-sm btn-success me-2"
                                         href="{{ route('admin.types.edit', $type->id) }}">
                                         <i class="fa-solid fa-pen"></i>

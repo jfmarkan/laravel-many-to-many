@@ -12,23 +12,24 @@
         <article class="card p-0 m-2 position-relative">
             <div class="card-body">
                 <h5 class="card-title">
-                    {{ $project->title }}
+                    {{ $project->id }} - {{ $project->title }}
                 </h5>
                 <div class="d-flex gap-3">
                     <h6>
-                        ID : {{ $project->id }}
-                    </h6>
-                    <h6>
-                        Type: <span class="badge" style="background-color:{{$project->type->color}}">{{$project->type->name}}</span>
+                        Type: <span class="badge bg-{{$project->type->color}}">{{$project->type->name}}</span>
                     </h6>
                 </div>
-
                 <img src="{{ asset('storage/' . $project->image)}}" alt="{{ $project->title }}'s Image">
                 <p class="card-text">
                     Development date: {{ $project->date }}
                 </p>
                 <p>
-                    <span class="fw-bold">Language: </span><span class="fw-light">{{ $project->language }}</span>
+                    <span class="fw-bold">Languages: </span>
+                    @if (count ($project->technologies) > 0)
+                        @foreach ($project->technologies as $technology)
+                            <img src="{{ asset('storage/' . $technology->image) }}" alt="{{$technology->name}}'s Logo" id="language-logo">
+                        @endforeach
+                    @endif
                 </p>
             </div>
             <div class="position-absolute mt-2 top-0 end-0">

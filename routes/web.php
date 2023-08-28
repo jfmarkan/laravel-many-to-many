@@ -33,7 +33,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function (){
     Route::post('/types/bin/{id}', [TypeController::class, 'restore'])->name('types.restore');
     Route::delete('/types/bin/{id}', [TypeController::class, 'delete'])->name('types.delete');
     Route::resource('/types', TypeController::class);
-
+    Route::get('/technologies/bin', [TechnologyController::class, 'binned'])->name('technologies.bin');
+    Route::post('/technologies/bin/{id}', [TechnologyController::class, 'restore'])->name('technologies.restore');
+    Route::delete('/technologies/bin/{id}', [TechnologyController::class, 'delete'])->name('technologies.delete');
     Route::resource('/technologies', TechnologyController::class);
 });
 

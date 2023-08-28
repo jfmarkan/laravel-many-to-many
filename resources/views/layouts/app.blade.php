@@ -68,8 +68,9 @@
                                         Deleted
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a href="{{ route('admin.technologies.bin')}}" class="dropdown-item">Technologies</a></li>
                                         <li><a href="{{ route('admin.types.bin')}}" class="dropdown-item">Types</a></li>
-                                        <li><a href="{{ route('admin.projects.bin') }}" class="dropdown-item">Project</a></li>
+                                        <li><a href="{{ route('admin.projects.bin') }}" class="dropdown-item">Projects</a></li>
                                     </ul>
                                 </div>
                             </li>

@@ -19,23 +19,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($projectList as $project)
+                        @foreach ($technologyList as $tech)
                             <tr>
                                 <th scope="row">
-                                    {{ $project->id }}
+                                    {{ $tech->id }}
                                 </th>
                                 <td>
-                                    {{ $project->title }}
+                                    {{ $tech->language }}
                                 </td>
                                 <td class="text-center">
-                                    <form action="{{ route('admin.projects.restore', $project->id) }}" class="d-inline form-restorer" method="POST">
+                                    <form action="{{ route('admin.technologies.restore', $tech->id) }}" class="d-inline form-restorer" method="POST">
                                         @csrf
                                         @method('POST')
                                         <button type="submit" class="btn btn-warning btn-sm">
                                             <i class="fa-solid fa-trash-arrow-up"></i>
                                         </button>
                                     </form>
-                                    <form action="{{route('admin.projects.destroy', $project->id)}}" class="d-inline form-terminator" method="POST">
+                                    <form action="{{route('admin.technologies.destroy', $tech->id)}}" class="d-inline form-terminator" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -49,9 +49,6 @@
                 </table>
             </div>
         </div>
-        <div class="d-block">
-            {!! $projectList->links() !!}
-        </div>
     </div>
 @endsection
 
@@ -63,7 +60,7 @@
         deleteFormElements.forEach(deleteformElement => {
             deleteformElement.addEventListener('submit', function(event) {
                 event.preventDefault();
-                const userConfirm = window.confirm('Are you sure you want to permanently delete this Type?');
+                const userConfirm = window.confirm('Are you sure you want to permanently delete this Technology?');
                 if (userConfirm){
                     this.submit();
                 }
@@ -73,7 +70,7 @@
         restoreFormElements.forEach(restoreformElement => {
             restoreformElement.addEventListener('submit', function(event) {
                 event.preventDefault();
-                const userConfirm = window.confirm('Are you sure you want to restore this Type?');
+                const userConfirm = window.confirm('Are you sure you want to restore this Technology?');
                 if (userConfirm){
                     this.submit();
                 }

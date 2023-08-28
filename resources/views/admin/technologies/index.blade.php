@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Projects Index')
+@section('title', 'Technologies Index')
 
 @section('custom-stylesheets')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -33,6 +33,12 @@
                         <i class="fa-solid fa-circle-exclamation"></i> <strong>{{ session('restored') }}</strong> has been succesfully restored.
                     </div>
                 </div>
+            @elseif ( session('hardDeleted'))
+                <div class="col-12">
+                    <div class="alert alert-success">
+                        <i class="fa-solid fa-circle-exclamation"></i> <strong>{{ session('destroyed') }}</strong> has been permanently deleted.
+                    </div>
+                </div>
             @endif
         </div>
         <div class="row">
@@ -40,38 +46,30 @@
                 <table class="table table-striped table-hover table-bordered table-sm">
                     <thead>
                         <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Language</th>
-                            <th scope="col">Repository name</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center bg-dark text-light">Id</th>
+                            <th class="bg-dark text-light">Language</th>
+                            <th class="text-center bg-dark text-light">Logo</th>
+                            <th class="text-center bg-dark text-light">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($projectList as $project)
+                        @foreach ($techList as $tech)
                             <tr>
-                                <th scope="row">
-                                    {{ $project->id }}
+                                <th scope="row" class="col-1 text-center">
+                                    {{ $tech->id }}
                                 </th>
                                 <td>
-                                    {{ $project->title }}
+                                    {{ $tech->language  }}
                                 </td>
-                                <td>
-                                    {{ $project->language }}
+                                <td class=" col-1 text-center">
+                                    <img src="{{asset('storage/' . $tech->image)}}" alt="{{$tech->language}} logo" id="language-logo">
                                 </td>
-                                <td>
-                                    {{ $project->repo }}
-                                </td>
-                                <td class="text-center">
-                                    <a class="btn btn-sm btn-primary me-2"
-                                        href="{{ route('admin.projects.show', $project->id) }}">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </a>
+                                <td class="col-1 text-center">
                                     <a class="btn btn-sm btn-success me-2"
-                                        href="{{ route('admin.projects.edit', $project->id) }}">
+                                        href="{{ route('admin.technologies.edit', $tech->id) }}">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
-                                    <form action="{{ route('admin.projects.delete', $project->id) }}" class="d-inline form-terminator" method="POST">
+                                    <form action="{{ route('admin.technologies.delete', $tech->id) }}" class="d-inline form-terminator" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-warning btn-sm">
@@ -85,7 +83,6 @@
                 </table>
             </div>
         </div>
-        {!! $projectList->links() !!}
     </div>
 @endsection
 
@@ -95,7 +92,7 @@
         deleteFormElements.forEach(formElement => {
             formElement.addEventListener('submit', function(event) {
                 event.preventDefault();
-                const userConfirm = window.confirm('Are you sure you want to delete this Project?');
+                const userConfirm = window.confirm('Are you sure you want to delete this Technology?');
                 if (userConfirm){
                     this.submit();
                 }

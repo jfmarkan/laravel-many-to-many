@@ -14,7 +14,8 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        $techList = Technology::all();
+        return view('admin.technologies.index', compact('techList'));
     }
 
     /**
@@ -52,7 +53,8 @@ class TechnologyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $technology = Technology::findOrFail($id);
+        return view('admin.technologies.edit', compact('technology'));
     }
 
     /**
@@ -66,8 +68,30 @@ class TechnologyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function delete(string $id)
+    {
+        $technology = Technology::findOrFail($id);
+        $technology->delete();
+        return redirect()->route('admin.technologies.index')->with('deleted', $technology->name);
+    }
+    
+    public function binned()
+    {
+        $technologyList = Technology::onlyTrashed()->paginate(10);
+        return view('admin.technologies.bin', compact('technologyList'));
+    }
+    
+    public function restore($id)
+    {
+        $technology = Technology::withTrashed()->findOrFail($id);
+        $technology->restore();
+        return redirect()->route('admin.technologies.index')->with('restored', $technology->name);
+    }
+    
     public function destroy(string $id)
     {
-        //
+        $technology = Technology::onlyTrashed()->findOrFail($id);
+        $technology->forceDelete();
+        return redirect()->route('admin.technologies.bin')->with('destroyed', $technology->name);
     }
 }

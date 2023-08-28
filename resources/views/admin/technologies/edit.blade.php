@@ -9,61 +9,27 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-around">
-            <form class="col-8 bg-light p-3 rounded" action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
+            <form class="col-8 bg-light p-3 rounded" action="{{ route('admin.technologies.update', $technology->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label for="title" class="form-label">
-                        Title
+                    <label for="language" class="form-label">
+                        Language
                     </label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ old ('title', $project->title) }}">
-                </div>
-                <div class="mb-3">
-                    <label for="repo" class="form-label">
-                        Repository name
-                    </label>
-                    <input type="text" class="form-control" id="repo" name="repo" value="{{ old ('repo', $project->repo) }}">
+                    <input type="text" class="form-control" id="language" name="language" value="{{ old ('language', $technology->language) }}">
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">
-                        Image
+                        Logo
                     </label>
-                    <input type="file" class="form-control" id="image" name="image" value="{{ old('image', '') }}">
+                    <input type="file" class="form-control" id="image" name="image" value="{{ old ('image', $technology->image) }}">
                 </div>
-                <div class="d-flex gap-2">
-                    <div class="col mb-3">
-                        <label for="language" class="form-label">
-                            Language
-                        </label>
-                        <input type="text" class="form-control" id="language" name="language" value="{{ old ('language', $project->language) }}">
-                    </div>
-                    <div class="col mb-3">
-                        <label for="type_id" class="form-label">
-                            Type
-                        </label>
-                        <select class="form-select" aria-label="Default select example" id="type_id" name="type_id" value="{{ old ('type', $project->type_id) }}">
-                            <option selected>Select a project type</option>
-                            @foreach ($typeList as $type)
-                                <option value="{{$type->id}}">{{$type->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="date" class="form-label">
-                        Date
-                    </label>
-                    <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $project->date) }}">
-                </div>
-                <div class="d-flex gap-2 justify-content-end">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fa-solid fa-check"></i>
-                    </button>
-                    <a href="{{ route('admin.projects.index')}}" class="btn btn-danger">
-                        <i class="fa-solid fa-xmark"></i>
-                    </a>
-                </div>
-                
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-check"></i>
+                </button>
+                <a href="{{ route('admin.technologies.index')}}" class="btn btn-danger">
+                    <i class="fa-solid fa-xmark"></i>
+                </a>
             </form>
         </div>
     </div>
