@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,6 @@ class ProjectController extends Controller
     public function index()
     {
         $projectList=Project::Paginate(15);
-
         return view('admin.projects.index', compact('projectList'));
     }
 
@@ -26,8 +26,8 @@ class ProjectController extends Controller
     public function create()
     {
         $typeList = Type::all();
-
-        return view('admin.projects.create', compact('typeList'));
+        $techList = Technology::all();
+        return view('admin.projects.create', compact('typeList', 'techList'));
     }
 
     /**
@@ -36,10 +36,14 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $newProject = Project::create($data);
         $img_path = Storage::put('uploads', $request['image']);
         $data['image']=$img_path;
+        $newProject = Project::create($data);
         $newProject->save();
+
+        if ($request->has('technologies')){
+            $newProject->technologies()->sync( $request->technologies);
+        }
 
         return redirect()->route('admin.projects.index')->with('created', $newProject->title);
     }

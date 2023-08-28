@@ -21,7 +21,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('admin/dashboard') }}">
                     @yield('title')
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -56,6 +56,7 @@
                                         Create
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a href="{{ route('admin.technologies.create')}}" class="dropdown-item">Technology</a></li>
                                         <li><a href="{{ route('admin.types.create')}}" class="dropdown-item">Type</a></li>
                                         <li><a href="{{ route('admin.projects.create') }}" class="dropdown-item">Project</a></li>
                                     </ul>

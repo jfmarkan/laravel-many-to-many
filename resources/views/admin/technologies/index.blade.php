@@ -37,15 +37,14 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <table class="table table-hover table-bordered table-sm">
+                <table class="table table-striped table-hover table-bordered table-sm">
                     <thead>
                         <tr>
-                            <th scope="col" class="bg-dark text-light">Id</th>
-                            <th scope="col" class="bg-dark text-light">Title</th>
-                            <th scope="col" class="bg-dark text-light">Repository name</th>
-                            <th class="text-center bg-dark text-light">Languages</th>
-                            <th class="text-center bg-dark text-light">Type</th>
-                            <th class="text-center bg-dark text-light">Actions</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Language</th>
+                            <th scope="col">Repository name</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,17 +57,10 @@
                                     {{ $project->title }}
                                 </td>
                                 <td>
+                                    {{ $project->language }}
+                                </td>
+                                <td>
                                     {{ $project->repo }}
-                                </td>
-                                <td class="text-center">
-                                    @if (count ($project->technologies) > 0)
-                                        @foreach ($project->technologies as $technology)
-                                            <img src="{{ asset('storage/' . $technology->image) }}" alt="{{$technology->name}}'s Logo" id="language-logo">
-                                        @endforeach
-                                     @endif
-                                </td>
-                                <td class="text-center">
-                                    <span class="badge bg-{{$project->type->color}}">{{ $project->type->name }}</span>
                                 </td>
                                 <td class="text-center">
                                     <a class="btn btn-sm btn-primary me-2"

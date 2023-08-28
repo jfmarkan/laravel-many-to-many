@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Technology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TechnologyController extends Controller
 {
@@ -20,7 +22,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create');
     }
 
     /**
@@ -28,7 +30,13 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $img_path = Storage::put('uploads/technologies/logos', $request['image']);
+        $data['image']=$img_path;
+        $newTechnology = Technology::create($data);
+        $newTechnology->save();
+
+        return redirect()->route('admin.dashboard')->with('createdTech', $newTechnology->title);
     }
 
     /**

@@ -10,6 +10,10 @@ class Technology extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = "technologies";
+
+    protected $fillable = ['language', 'image'];
+
     public function projects(){
         return $this->belongsToMany(Project::class);
     }
