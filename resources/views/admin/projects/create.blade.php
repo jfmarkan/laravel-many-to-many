@@ -32,7 +32,7 @@
                     </div>
                     <div class="self-align-center">
                         @foreach ($techList as $tech)
-                            <input type="checkbox" name="technologies[]" id="technologies" value="{{$tech->id}}"
+                            <input class="form-check-input" type="checkbox" name="technologies[]" id="technologies" value="{{$tech->id}}"
                                 @if( in_array($tech->id, old('technologies', []))) checked @endif>
                             <label for="technologies" class="form-check-label me-2"> {{$tech->language}}</label>
                         @endforeach

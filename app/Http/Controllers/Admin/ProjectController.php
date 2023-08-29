@@ -64,7 +64,8 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $typeList = Type::all();
-        return view('admin.projects.edit', compact('project','typeList'));
+        $techList = Technology::all();
+        return view('admin.projects.edit', compact('project','typeList', 'techList'));
     }
 
     /**
@@ -74,7 +75,16 @@ class ProjectController extends Controller
     {
         $data = $request->all();
 
+        
+
         $project = Project::findOrFail($id);
+        
+        if ($request->hasFile('image')){
+            Storage::delete($project->image);
+            $img_path = Storage::put('uploads/posts', $request['image']);
+            $data['image'] = $img_path;
+        }
+        
         $img_path = Storage::put('uploads', $request['image']);
         $data['image'] = $img_path;
         $project->update($data);
@@ -107,6 +117,8 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         $project = Project::onlyTrashed()->findOrFail($id);
+        Storage::delete($project->image);
+        $project->technologies()->detach();
         $project->forceDelete();
         return redirect()->route('admin.projects.bin')->with('destroyed', $project->name);
     }

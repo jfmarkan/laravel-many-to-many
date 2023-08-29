@@ -15,9 +15,9 @@ class PageController extends Controller
     }
 
     public function dashboard(){
-        $projectList = Project::Paginate();
-        $typeList = Type::all();
-        $techList = Technology::all();
+        $projectList = Project::Paginate(14, ['*'], 'projects');
+        $typeList = Type::Paginate(5, ['*'], 'types');
+        $techList = Technology::Paginate(5, ['*'], 'techs');
         return view('admin.dashboard', compact('projectList', 'typeList', 'techList'));
     }
 }

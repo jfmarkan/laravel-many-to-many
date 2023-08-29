@@ -15,7 +15,7 @@
                         Projects
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover table-sm">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -35,6 +35,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div>
+                            {{ $projectList->links() }}
+                        </div>
                         <div class="d-flex justify-content-end">
                             <a href="{{route('admin.projects.index')}}" class="btn btn-dark w-25">Go to Projects</a>
                         </div>
@@ -49,7 +52,7 @@
                                 Types
                             </div>
                             <div class="card-body">
-                                <table class="table table-striped table-sm">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -67,6 +70,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div>
+                                    {{ $typeList->links() }}
+                                </div>
                                 <div class="d-flex justify-content-end">
                                     <a href="{{route('admin.types.index')}}" class="btn btn-dark w-50">Go to Types</a>
                                 </div>
@@ -81,7 +87,7 @@
                                 Technologies
                             </div>
                             <div class="card-body">
-                                <table class="table table-striped table-sm">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -99,6 +105,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div>
+                                    {{ $techList->links() }}
+                                </div>
                                 <div class="d-flex justify-content-end">
                                     <a href="{{route('admin.technologies.index')}}" class="btn btn-dark w-50">Go to Technologies</a>
                                 </div>

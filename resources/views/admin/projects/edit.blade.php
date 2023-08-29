@@ -25,17 +25,25 @@
                     <input type="text" class="form-control" id="repo" name="repo" value="{{ old ('repo', $project->repo) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">
-                        Image
-                    </label>
-                    <input type="file" class="form-control" id="image" name="image" value="{{ old('image', '') }}">
+                    <div>
+                        <label for="language" class="form-label">
+                            Technologies
+                        </label>
+                    </div>
+                    <div class="self-align-center">
+                        @foreach ($techList as $tech)
+                            <input class="form-check-input" type="checkbox" name="technologies[]" id="technologies" value="{{$tech->id}}"
+                                @if($project->technologies->contains($tech->id)) checked @endif>
+                            <label for="technologies" class="form-check-label me-2"> {{$tech->language}}</label>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="d-flex gap-2">
-                    <div class="col mb-3">
-                        <label for="language" class="form-label">
-                            Language
+                    <div class=" col mb-3">
+                        <label for="image" class="form-label">
+                            Image
                         </label>
-                        <input type="text" class="form-control" id="language" name="language" value="{{ old ('language', $project->language) }}">
+                        <input type="file" class="form-control" id="image" name="image" value="{{ old('image', '') }}">
                     </div>
                     <div class="col mb-3">
                         <label for="type_id" class="form-label">
@@ -44,16 +52,18 @@
                         <select class="form-select" aria-label="Default select example" id="type_id" name="type_id" value="{{ old ('type', $project->type_id) }}">
                             <option selected>Select a project type</option>
                             @foreach ($typeList as $type)
-                                <option value="{{$type->id}}">{{$type->name}}</option>
+                                <option value="{{$type->id}}" {{old('type_id', $project->type_id) == $type->id ? 'selected' : ''}}>    
+                                    {{$type->name}}
+                                </option>
                             @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label for="date" class="form-label">
-                        Date
-                    </label>
-                    <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $project->date) }}">
+                    <div class="mb-3">
+                        <label for="date" class="form-label">
+                            Date
+                        </label>
+                        <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $project->date) }}">
+                    </div>
                 </div>
                 <div class="d-flex gap-2 justify-content-end">
                     <button type="submit" class="btn btn-success">
